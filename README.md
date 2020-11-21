@@ -1,4 +1,11 @@
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/yusubX/Covidolog/Coverage)
 [![codecov](https://codecov.io/gh/yusubx/Covidolog/branch/main/graph/badge.svg)](https://codecov.io/gh/yusubx/Covidolog)
+![GitHub forks](https://img.shields.io/github/forks/yusubx/Covidolog)
+![GitHub Repo stars](https://img.shields.io/github/stars/yusubx/Covidolog)
+![GitHub watchers](https://img.shields.io/github/watchers/yusubx/Covidolog)
+![GitHub contributors](https://img.shields.io/github/contributors/yusubx/Covidolog)
+![GitHub last commit](https://img.shields.io/github/last-commit/yusubx/Covidolog)
+![GitHub](https://img.shields.io/github/license/yusubx/Covidolog)
 
 # covidolog
 
