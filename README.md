@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/yusubx/Covidolog/branch/main/graph/badge.svg)](https://codecov.io/yusubx/{Covidolog})
+
 # covidolog
 
 A new Flutter project.
