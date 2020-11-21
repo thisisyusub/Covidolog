@@ -6,7 +6,7 @@ on:
     - master
 
 jobs:
-  coverage-hive:
+  coverage-covidolog:
     runs-on: ubuntu-latest
     
     container:
