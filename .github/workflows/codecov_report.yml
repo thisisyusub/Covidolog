@@ -5,7 +5,7 @@ on:
       - main
 
 jobs:
-  coverage-covidolog:
+  build:
     runs-on: ubuntu-latest
     
     container:
