@@ -14,7 +14,7 @@ jobs:
           channel: "stable"
       - uses: stelynx/dart-full-coverage@v1.0.3
         with:
-          package: egakcap
+          package: covidolog
           ignore: "*_state.dart, do_not_import_me.dart"
       - run: flutter pub get
       # - run: flutter packages pub run build_runner build
