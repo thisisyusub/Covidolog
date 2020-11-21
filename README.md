@@ -5,7 +5,7 @@
 ![GitHub watchers](https://img.shields.io/github/watchers/yusubx/Covidolog)
 ![GitHub contributors](https://img.shields.io/github/contributors/yusubx/Covidolog)
 ![GitHub last commit](https://img.shields.io/github/last-commit/yusubx/Covidolog)
-![GitHub](https://img.shields.io/github/license/yusubx/Covidolog)
+![GitHub](https://img.shields.io/github/license/yusubx/covidolog)
 
 # covidolog
 
