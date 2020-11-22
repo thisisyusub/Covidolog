@@ -19,7 +19,8 @@ jobs:
     - run: flutter build
     # - run: flutter analyze
     - run: flutter test --coverage
+           
     - uses: codecov/codecov-action@v1.0.2
       with:
-        token: ${{secrets.CODECOV_TOKEN}}
+        token: ${{secrets.CODECOV_TOKEN}}  
         file: ./coverage/lcov.info
