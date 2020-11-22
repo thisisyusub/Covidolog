@@ -32,6 +32,7 @@
  *OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+// coverage:ignore-start
 import 'package:flutter/foundation.dart';
 
 /// stores base configurations for app
@@ -53,3 +54,4 @@ class Config {
   /// enables logging is current mode is [Debug] mode
   static const bool enableLogging = kDebugMode;
 }
+// coverage:ignore-end

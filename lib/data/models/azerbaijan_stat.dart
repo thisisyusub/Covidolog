@@ -32,6 +32,7 @@
  *OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+// coverage:ignore-start
 import 'package:hive/hive.dart';
 
 part 'azerbaijan_stat.g.dart';
@@ -74,3 +75,4 @@ class AzerbaijanStat {
   @HiveField(5)
   final String totalTestsCount;
 }
+// coverage:ignore-end

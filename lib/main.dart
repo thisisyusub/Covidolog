@@ -1,3 +1,4 @@
+// coverage:ignore-start
 import 'package:covidolog/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -31,3 +32,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+// coverage:ignore-end
