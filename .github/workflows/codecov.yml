@@ -19,8 +19,8 @@ jobs:
     - run: flutter build
     # - run: flutter analyze
     - run: flutter test --coverage
-           lcov --remove coverage/lcov.info 'lib/data/model/*' 'lib/data/config/*' 'lib/home_page.dart' -o coverage/lcov_cleaned.info
+           
     - uses: codecov/codecov-action@v1.0.2
       with:
-        token: ${{secrets.CODECOV_TOKEN}}
+        token: ${{secrets.CODECOV_TOKEN}}  
         file: ./coverage/lcov.info
