@@ -32,45 +32,40 @@
  *OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import 'package:hive/hive.dart';
+import 'package:flutter/material.dart';
+import '../../widgets/app_bottom_nav_bar.dart';
+import '../local_statistics/local_statistics_page.dart';
 
-part 'azerbaijan_stat.g.dart';
+class MainPage extends StatefulWidget {
+  const MainPage({Key key}) : super(key: key);
 
-/// Simple Class for [Azerbaijan Statistics]
-///
-/// instance contains different [counts] of [statistics]
-@HiveType(typeId: 0)
-class AzerbaijanStat {
-  AzerbaijanStat({
-    this.totalCasesCount,
-    this.totalHealedCount,
-    this.newCasesCount,
-    this.activeCasesCount,
-    this.totalDeathCount,
-    this.totalTestsCount,
-  });
+  @override
+  _MainPageState createState() => _MainPageState();
+}
 
-  /// count of total cases in [Azerbaijan]
-  @HiveField(0)
-  final String totalCasesCount;
+class _MainPageState extends State<MainPage> {
+  final _pageController = PageController(initialPage: 1);
 
-  /// count of healed in [Azerbaijan]
-  @HiveField(1)
-  final String totalHealedCount;
-
-  /// count of new cases in [Azerbaijan]
-  @HiveField(2)
-  final String newCasesCount;
-
-  /// count of active cases in [Azerbaijan]
-  @HiveField(3)
-  final String activeCasesCount;
-
-  /// count of total death in [Azerbaijan]
-  @HiveField(4)
-  final String totalDeathCount;
-
-  /// count of total tests in [Azerbaijan]
-  @HiveField(5)
-  final String totalTestsCount;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Main Page'),
+      ),
+      body: PageView(
+        allowImplicitScrolling: false,
+        controller: _pageController,
+        children: [
+          Text('Məlumat'),
+          LocalStatisticsPage(),
+          Text('Xəbərlər'),
+        ],
+      ),
+      bottomNavigationBar: AppBottomNavBar(
+        onNavItemTapped: (int selectedIndex) {
+          _pageController.jumpToPage(selectedIndex);
+        },
+      ),
+    );
+  }
 }

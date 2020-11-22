@@ -32,45 +32,34 @@
  *OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import 'package:hive/hive.dart';
+import 'package:flutter/material.dart';
 
-part 'azerbaijan_stat.g.dart';
-
-/// Simple Class for [Azerbaijan Statistics]
-///
-/// instance contains different [counts] of [statistics]
-@HiveType(typeId: 0)
-class AzerbaijanStat {
-  AzerbaijanStat({
-    this.totalCasesCount,
-    this.totalHealedCount,
-    this.newCasesCount,
-    this.activeCasesCount,
-    this.totalDeathCount,
-    this.totalTestsCount,
+class StatItem extends StatelessWidget {
+  const StatItem({
+    @required this.title,
+    @required this.count,
   });
 
-  /// count of total cases in [Azerbaijan]
-  @HiveField(0)
-  final String totalCasesCount;
+  final String count;
+  final String title;
 
-  /// count of healed in [Azerbaijan]
-  @HiveField(1)
-  final String totalHealedCount;
-
-  /// count of new cases in [Azerbaijan]
-  @HiveField(2)
-  final String newCasesCount;
-
-  /// count of active cases in [Azerbaijan]
-  @HiveField(3)
-  final String activeCasesCount;
-
-  /// count of total death in [Azerbaijan]
-  @HiveField(4)
-  final String totalDeathCount;
-
-  /// count of total tests in [Azerbaijan]
-  @HiveField(5)
-  final String totalTestsCount;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Theme.of(context).highlightColor,
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            count,
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
+          SizedBox(height: 10),
+          Text(title),
+        ],
+      ),
+    );
+  }
 }

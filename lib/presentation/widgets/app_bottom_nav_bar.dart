@@ -32,45 +32,51 @@
  *OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import 'package:hive/hive.dart';
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-part 'azerbaijan_stat.g.dart';
+class AppBottomNavBar extends StatefulWidget {
+  const AppBottomNavBar({
+    Key key,
+    @required this.onNavItemTapped,
+  }) : super(key: key);
 
-/// Simple Class for [Azerbaijan Statistics]
-///
-/// instance contains different [counts] of [statistics]
-@HiveType(typeId: 0)
-class AzerbaijanStat {
-  AzerbaijanStat({
-    this.totalCasesCount,
-    this.totalHealedCount,
-    this.newCasesCount,
-    this.activeCasesCount,
-    this.totalDeathCount,
-    this.totalTestsCount,
-  });
+  final ValueChanged<int> onNavItemTapped;
 
-  /// count of total cases in [Azerbaijan]
-  @HiveField(0)
-  final String totalCasesCount;
+  @override
+  _AppBottomNavBarState createState() => _AppBottomNavBarState();
+}
 
-  /// count of healed in [Azerbaijan]
-  @HiveField(1)
-  final String totalHealedCount;
+class _AppBottomNavBarState extends State<AppBottomNavBar> {
+  int _selectedIndex = 1;
 
-  /// count of new cases in [Azerbaijan]
-  @HiveField(2)
-  final String newCasesCount;
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavyBar(
+      selectedIndex: _selectedIndex,
+      animationDuration: Duration(milliseconds: 300),
+      items: [
+        _navBarItem(context, CupertinoIcons.info, 'Məlumat'),
+        _navBarItem(context, CupertinoIcons.chart_bar_square, 'Azərbaycan'),
+        _navBarItem(context, CupertinoIcons.news, 'Xəbərlər'),
+      ],
+      onItemSelected: (int selectedIndex) {
+        setState(() {
+          _selectedIndex = selectedIndex;
+        });
+        widget.onNavItemTapped?.call(selectedIndex);
+      },
+    );
+  }
 
-  /// count of active cases in [Azerbaijan]
-  @HiveField(3)
-  final String activeCasesCount;
-
-  /// count of total death in [Azerbaijan]
-  @HiveField(4)
-  final String totalDeathCount;
-
-  /// count of total tests in [Azerbaijan]
-  @HiveField(5)
-  final String totalTestsCount;
+  BottomNavyBarItem _navBarItem(
+      BuildContext context, IconData icon, String text) {
+    return BottomNavyBarItem(
+      activeColor: Theme.of(context).primaryColor,
+      inactiveColor: Theme.of(context).accentColor,
+      icon: Icon(icon),
+      title: Text(text),
+    );
+  }
 }
