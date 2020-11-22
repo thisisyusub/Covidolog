@@ -57,7 +57,6 @@ class _LocalStatisticsPageState extends State<LocalStatisticsPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    debugPrint('rebuilding. LocalStatisticsPage..');
 
     return FutureBuilder<AzerbaijanStat>(
         future: _htmlParserService.parseAzerbaijanStat(),
@@ -76,10 +75,11 @@ class _LocalStatisticsPageState extends State<LocalStatisticsPage>
           final azerbaijanStat = azerbaijanStatSnapshot.data;
 
           return GridView(
+            padding: const EdgeInsets.all(8.0),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
             ),
             children: [
               StatItem(

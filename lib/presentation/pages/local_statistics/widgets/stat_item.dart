@@ -46,18 +46,30 @@ class StatItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).highlightColor,
       padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Theme.of(context).highlightColor,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 16,
+            color: Theme.of(context).shadowColor,
+            offset: Offset(0.0, 2.0),
+          ),
+        ],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
             count,
-            style: Theme.of(context).textTheme.subtitle2,
+            style: Theme.of(context).textTheme.headline5,
           ),
           SizedBox(height: 10),
-          Text(title),
+          Text(
+            title,
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
         ],
       ),
     );

@@ -56,9 +56,9 @@ class _MainPageState extends State<MainPage> {
         allowImplicitScrolling: false,
         controller: _pageController,
         children: [
-          Text('Məlumat'),
+          Center(child: Text('Məlumat')),
           LocalStatisticsPage(),
-          Text('Xəbərlər'),
+          Center(child: Text('Xəbərlər')),
         ],
       ),
       bottomNavigationBar: AppBottomNavBar(

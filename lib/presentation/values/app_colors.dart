@@ -32,52 +32,10 @@
  *OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AppBottomNavBar extends StatefulWidget {
-  const AppBottomNavBar({
-    Key key,
-    @required this.onNavItemTapped,
-  }) : super(key: key);
-
-  final ValueChanged<int> onNavItemTapped;
-
-  @override
-  _AppBottomNavBarState createState() => _AppBottomNavBarState();
-}
-
-class _AppBottomNavBarState extends State<AppBottomNavBar> {
-  int _selectedIndex = 1;
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavyBar(
-      key: ValueKey('bottomNavBar'),
-      selectedIndex: _selectedIndex,
-      animationDuration: Duration(milliseconds: 300),
-      items: [
-        _navBarItem(context, CupertinoIcons.info, 'Məlumat'),
-        _navBarItem(context, CupertinoIcons.chart_bar_square, 'Azərbaycan'),
-        _navBarItem(context, CupertinoIcons.news, 'Xəbərlər'),
-      ],
-      onItemSelected: (int selectedIndex) {
-        setState(() {
-          _selectedIndex = selectedIndex;
-        });
-        widget.onNavItemTapped?.call(selectedIndex);
-      },
-    );
-  }
-
-  BottomNavyBarItem _navBarItem(
-      BuildContext context, IconData icon, String text) {
-    return BottomNavyBarItem(
-      activeColor: Theme.of(context).primaryColor,
-      inactiveColor: Theme.of(context).accentColor,
-      icon: Icon(icon),
-      title: Text(text),
-    );
-  }
-}
+const Color primarySwatch = Colors.deepOrange;
+const Color accent = Colors.deepOrangeAccent;
+final Color lightStatItemColor = Colors.blueGrey[100];
+const Color darkStatItemColor = Colors.black26;
+final Color lightStatItemShadowcolor = Colors.grey;

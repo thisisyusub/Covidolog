@@ -34,6 +34,7 @@
 
 import 'package:flutter/material.dart';
 import './presentation/pages/main/main_page.dart';
+import './presentation/values/app_theme.dart';
 
 void main() {
   runApp(MyApp());
@@ -43,12 +44,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'XCovidolog',
-      theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
-        accentColor: Colors.deepOrangeAccent,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      title: 'Covidolog',
+      theme: lightTheme,
       home: MainPage(),
     );
   }
