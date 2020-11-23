@@ -1,5 +1,5 @@
 /*
- * Created on Sun Nov 22 2020
+ * Created on Mon Nov 23 2020
  *
  * BSD 3-Clause License
  *
@@ -32,41 +32,39 @@
  *OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import 'package:flutter/material.dart';
-import '../../widgets/app_bottom_nav_bar.dart';
-import '../local_statistics/local_statistics_page.dart';
-import '../../../data/services/html_parser_service.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key key}) : super(key: key);
+import '../models/azerbaijan_stat.dart';
 
-  @override
-  _MainPageState createState() => _MainPageState();
-}
+class CacheService {
+  CacheService._();
 
-class _MainPageState extends State<MainPage> {
-  final _pageController = PageController(initialPage: 1);
+  static Future<CacheService> get instance async {
+    if (_instance == null) {
+      _instance = CacheService._();
+      await _configCacheService(1);
+    }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Covidolog'),
-      ),
-      body: PageView(
-        allowImplicitScrolling: false,
-        controller: _pageController,
-        children: [
-          Center(child: Text('Məlumat')),
-          LocalStatisticsPage(htmlParserService: HtmlParserService.instance),
-          Center(child: Text('Xəbərlər')),
-        ],
-      ),
-      bottomNavigationBar: AppBottomNavBar(
-        onNavItemTapped: (int selectedIndex) {
-          _pageController.jumpToPage(selectedIndex);
-        },
-      ),
-    );
+    return _instance;
+  }
+
+  static CacheService _instance;
+
+  static Future<void> _configCacheService(int version) async {
+    await Hive.initFlutter();
+
+    Hive.registerAdapter(AzerbaijanStatAdapter());
+    final appBox = await Hive.openBox('appBox');
+
+    if (appBox.containsKey('version')) {
+      final cacheVersion = appBox.get('version');
+
+      if (cacheVersion != version) {
+        /// here would be migration logic for new version
+      }
+    } else {
+      await appBox.put('version', version);
+    }
   }
 }

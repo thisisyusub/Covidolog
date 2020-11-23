@@ -1,5 +1,5 @@
 /*
- * Created on Sun Nov 22 2020
+ * Created on Mon Nov 23 2020
  *
  * BSD 3-Clause License
  *
@@ -32,41 +32,38 @@
  *OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import 'package:flutter/material.dart';
-import '../../widgets/app_bottom_nav_bar.dart';
-import '../local_statistics/local_statistics_page.dart';
-import '../../../data/services/html_parser_service.dart';
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key key}) : super(key: key);
+import '../../data/models/azerbaijan_stat.dart';
+import '../../data/contractors/impl_local_stat_repository.dart';
 
-  @override
-  _MainPageState createState() => _MainPageState();
-}
+part 'local_stat_state.dart';
 
-class _MainPageState extends State<MainPage> {
-  final _pageController = PageController(initialPage: 1);
+/// Simple [BLoC] to handle process of [LocalStat] and
+/// send it to the [UI].
+class LocalStatCubit extends Cubit<LocalStatState> {
+  LocalStatCubit({@required this.localStatRepository})
+      : super(LocalStatInitial());
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Covidolog'),
-      ),
-      body: PageView(
-        allowImplicitScrolling: false,
-        controller: _pageController,
-        children: [
-          Center(child: Text('Məlumat')),
-          LocalStatisticsPage(htmlParserService: HtmlParserService.instance),
-          Center(child: Text('Xəbərlər')),
-        ],
-      ),
-      bottomNavigationBar: AppBottomNavBar(
-        onNavItemTapped: (int selectedIndex) {
-          _pageController.jumpToPage(selectedIndex);
-        },
-      ),
-    );
+  /// any instance that is the child of [ILocalStatRepository]
+  /// can be set to this parameter. This type is used for
+  /// [Dependency Inversion (DI)]. High level  entities shouldn't 
+  /// be depend on low level entities.
+  final ILocalStatRepository localStatRepository;
+
+  /// handles fetcing prosses by requesting directly from [LocalStatRepository]
+  /// and undirectly from [HtmlParserSerivce] to get covid-19 statistics
+  /// for [Azerbaijan].
+  void fetchAzerbaijanStat() async {
+    try {
+      emit(LocalStatInProgress());
+      emit(LocalStatSuccess(
+          azerbaijanStat: await localStatRepository.fetchAzerbaijanStat()));
+    } on Exception {
+      emit(LocalStatFailure(
+          errorMessage: 'Xəta baş verdi. Zəhmət olmasa, yenidən yoxlayın.'));
+    }
   }
 }

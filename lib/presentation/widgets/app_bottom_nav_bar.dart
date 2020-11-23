@@ -58,9 +58,33 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
       selectedIndex: _selectedIndex,
       animationDuration: Duration(milliseconds: 300),
       items: [
-        _navBarItem(context, CupertinoIcons.info, 'Məlumat'),
-        _navBarItem(context, CupertinoIcons.chart_bar_square, 'Azərbaycan'),
-        _navBarItem(context, CupertinoIcons.news, 'Xəbərlər'),
+        BottomNavyBarItem(
+          activeColor: Theme.of(context).primaryColor,
+          inactiveColor: Theme.of(context).accentColor,
+          icon: Icon(CupertinoIcons.info),
+          title: Text(
+            'Məlumat',
+            key: ValueKey('info'),
+          ),
+        ),
+        BottomNavyBarItem(
+          activeColor: Theme.of(context).primaryColor,
+          inactiveColor: Theme.of(context).accentColor,
+          icon: Icon(CupertinoIcons.chart_bar_square),
+          title: Text(
+            'Azərbaycan',
+            key: ValueKey('az'),
+          ),
+        ),
+        BottomNavyBarItem(
+          activeColor: Theme.of(context).primaryColor,
+          inactiveColor: Theme.of(context).accentColor,
+          icon: Icon(CupertinoIcons.news),
+          title: Text(
+            'Xəbərlər',
+            key: ValueKey('news'),
+          ),
+        ),
       ],
       onItemSelected: (int selectedIndex) {
         setState(() {
@@ -71,13 +95,16 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
     );
   }
 
-  BottomNavyBarItem _navBarItem(
-      BuildContext context, IconData icon, String text) {
-    return BottomNavyBarItem(
-      activeColor: Theme.of(context).primaryColor,
-      inactiveColor: Theme.of(context).accentColor,
-      icon: Icon(icon),
-      title: Text(text),
-    );
-  }
+  // BottomNavyBarItem _navBarItem(
+  //     BuildContext context, IconData icon, String text) {
+  //   return BottomNavyBarItem(
+  //     activeColor: Theme.of(context).primaryColor,
+  //     inactiveColor: Theme.of(context).accentColor,
+  //     icon: Icon(icon),
+  //     title: Text(
+  //       text,
+  //       key: ValueKey('info'),
+  //     ),
+  //   );
+  // }
 }

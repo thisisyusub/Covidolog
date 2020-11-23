@@ -1,5 +1,5 @@
 /*
- * Created on Sun Nov 22 2020
+ * Created on Mon Nov 23 2020
  *
  * BSD 3-Clause License
  *
@@ -32,41 +32,27 @@
  *OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import 'package:flutter/material.dart';
-import '../../widgets/app_bottom_nav_bar.dart';
-import '../local_statistics/local_statistics_page.dart';
-import '../../../data/services/html_parser_service.dart';
+import 'package:flutter/foundation.dart';
+import 'package:covidolog/data/models/azerbaijan_stat.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key key}) : super(key: key);
+import '../contractors/impl_local_stat_repository.dart';
+import '../services/html_parser_service.dart';
 
+/// Repository to handle process about [Local Statistics of Azerbaijan]
+class LocalStatRepository implements ILocalStatRepository {
+  LocalStatRepository({@required this.htmlParserService})
+      : assert(htmlParserService != null);
+
+  /// will be injected from call stak
+  /// uses for parse and fetch HTML content
+  final HtmlParserService htmlParserService;
+
+  /// returns instance of [AzerbaijanStat]
+  ///
+  /// throws error to call stack to handle [Exceptions]
+  /// caller should catch exceptions, otherwise
+  /// will be error.
   @override
-  _MainPageState createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  final _pageController = PageController(initialPage: 1);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Covidolog'),
-      ),
-      body: PageView(
-        allowImplicitScrolling: false,
-        controller: _pageController,
-        children: [
-          Center(child: Text('Məlumat')),
-          LocalStatisticsPage(htmlParserService: HtmlParserService.instance),
-          Center(child: Text('Xəbərlər')),
-        ],
-      ),
-      bottomNavigationBar: AppBottomNavBar(
-        onNavItemTapped: (int selectedIndex) {
-          _pageController.jumpToPage(selectedIndex);
-        },
-      ),
-    );
-  }
+  Future<AzerbaijanStat> fetchAzerbaijanStat() =>
+      htmlParserService.parseAzerbaijanStat();
 }

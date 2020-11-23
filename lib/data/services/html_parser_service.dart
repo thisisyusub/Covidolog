@@ -2,7 +2,8 @@
  * Created on Sun Nov 22 2020
  *
  * BSD 3-Clause License
- *
+ 
+*
  *Copyright (c) 2020, Kanan Yusubov
  *All rights reserved.
  *

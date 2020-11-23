@@ -38,7 +38,10 @@ import '../../../data/models/azerbaijan_stat.dart';
 import '../../../data/services/html_parser_service.dart';
 
 class LocalStatisticsPage extends StatefulWidget {
-  const LocalStatisticsPage({Key key}) : super(key: key);
+  const LocalStatisticsPage({Key key, this.htmlParserService})
+      : super(key: key);
+
+  final HtmlParserService htmlParserService;
 
   @override
   _LocalStatisticsPageState createState() => _LocalStatisticsPageState();
@@ -46,20 +49,12 @@ class LocalStatisticsPage extends StatefulWidget {
 
 class _LocalStatisticsPageState extends State<LocalStatisticsPage>
     with AutomaticKeepAliveClientMixin {
-  HtmlParserService _htmlParserService;
-
-  @override
-  void initState() {
-    super.initState();
-    _htmlParserService = HtmlParserService.instance;
-  }
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
     return FutureBuilder<AzerbaijanStat>(
-        future: _htmlParserService.parseAzerbaijanStat(),
+        future: widget.htmlParserService.parseAzerbaijanStat(),
         builder: (_, azerbaijanStatSnapshot) {
           if (azerbaijanStatSnapshot.connectionState ==
               ConnectionState.waiting) {
